@@ -30,8 +30,12 @@ jobs:
 
       - name: run pytest
         run: |
-          make test
+          make test      
 
-      - name: run pytest code coverage
-        run: |
-          make test-cov
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: 443392ec7aac5a8faa56737ae82a848d40be03dfb3aabbba5953dd16f1e1c8ee
+        with:
+          coverageCommand: make test-cov
+          debug: true

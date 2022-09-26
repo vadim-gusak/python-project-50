@@ -20,4 +20,4 @@ test:
 		poetry run pytest
 
 test-cov:
-		poetry run coverage run -m pytest --cov=gendiff
+		poetry run pytest --cov=gendiff --cov-report xml
