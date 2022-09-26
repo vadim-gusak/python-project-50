@@ -3,5 +3,3 @@ dist/
 gendiff/__pycache__/
 gendiff/scripts/__pycache__/
 tests/__pycache__/
-.coverage
-
