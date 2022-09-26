@@ -1,5 +1,4 @@
 from gendiff.base import generate_diff
-import pytest
 
 
 def test_generate_diff_flat():
