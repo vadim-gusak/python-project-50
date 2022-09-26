@@ -1,4 +1,24 @@
-def create_data(file1, file2):
+import json
+import yaml
+
+
+def open_file(path):
+    if path.endswith('.json'):
+        file = json.load(open(path))
+        return file
+    if path.endswith('.yml') or path.endswith('.yaml'):
+        with open(path, 'r') as stream:
+            file = yaml.load(stream, yaml.Loader)
+            print('YML File:')
+            print(file)
+            return file
+    print('Incorrect file or files!')
+    return None
+
+
+def create_data(path1, path2):
+    file1 = open_file(path1)
+    file2 = open_file(path2)
     data = {'names': []}
     for key in file1:
         data[key] = {'first': file1[key]}
