@@ -16,6 +16,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          make install
+
       - name: Run flake8 linter
-        run:
+        run: |
           make lint
