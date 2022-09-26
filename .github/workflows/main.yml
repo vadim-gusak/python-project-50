@@ -24,8 +24,14 @@ jobs:
           pip install poetry
           make install
 
-      - name: Run flake8 linter and pytest
+      - name: Run flake8 linter
         run: |
           make lint
+
+      - name: run pytest
+        run: |
           make test
-          
+
+      - name: run pytest code coverage
+        run: |
+          make test-cov
