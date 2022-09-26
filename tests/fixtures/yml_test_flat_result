@@ -1,0 +1,10 @@
+{
+    create_key: true
+  - knows_oop: true
+    likes_emacs: true
+  - needs_agent: false
+  - uses_cvs: false
+  + uses_cvs: true
+  + wow_agent: wow
+  + ww_agent: 56
+}
