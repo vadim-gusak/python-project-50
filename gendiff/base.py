@@ -1,13 +1,23 @@
-from  gendiff.data import open_file, create_tree_from_file
-from gendiff.diff import create_diff, prepare_to_print
+from gendiff.data import open_file, create_tree_from_file
+from gendiff.diff import create_diff
+from gendiff.stylish import prepare_to_print_stylish
+from gendiff.plain import prepare_to_print_plaint
 
 
-def generate_diff(file_path1, file_path2):
+def generate_diff(file_path1, file_path2, print_format='stylish'):
     file1 = open_file(file_path1)
+    if file1 is None:
+        return 'Wrong file format!'
     file2 = open_file(file_path2)
+    if file2 is None:
+        return 'Wrong file format!'
     file_tree1 = create_tree_from_file(file1)
     file_tree2 = create_tree_from_file(file2)
     diff = create_diff(file_tree1, file_tree2)
-    result = prepare_to_print(diff)
-    print(result)
+    if print_format == 'stylish':
+        result = prepare_to_print_stylish(diff)
+    elif print_format == 'plain':
+        result = prepare_to_print_plaint(diff)
+    else:
+        result = 'Wrong format!'
     return result

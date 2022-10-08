@@ -25,11 +25,79 @@ def make_node(name, children):
     return result
 
 
+def make_switch_to_leaf(name, children, value):
+    result = {'name': name, 'type': 'to leaf',
+              'children': children, 'value': value}
+    return result
+
+
+def make_switch_to_node(name, children, value):
+    result = {'name': name, 'type': 'to node',
+              'children': children, 'value': value}
+    return result
+
+
 def is_end(node):
     for k, v in node.items():
         if isinstance(v, dict):
             return False
     return True
+
+
+def is_leaf(node):
+    if node['type'] == 'leaf':
+        return True
+    return False
+
+
+def is_node(node):
+    if node['type'] == 'node':
+        return True
+    return False
+
+
+def is_switch_to_node(node):
+    if node['type'] == 'to note':
+        return True
+    return False
+
+
+def is_switch_to_leaf(node):
+    if node['type'] == 'to leaf':
+        return True
+    return False
+
+
+def get_name(node):
+    return node['name']
+
+
+def get_node_by_name(nodes, name):
+    for item in nodes:
+        if item['name'] == name:
+            return item
+    return None
+
+
+def get_value(node):
+    return node['value']
+
+
+def get_second_value(node):
+    return node['second value']
+
+
+def get_children(node):
+    return node['children']
+
+
+def get_diff(node):
+    return node['diff']
+
+
+def add_new_value(node, value):
+    node['second value'] = value
+    return node
 
 
 def create_tree_from_file(node):
@@ -45,49 +113,3 @@ def create_tree_from_file(node):
             children = create_tree_from_file(value)
             nodes.append(make_node(key, children))
     return leafs + nodes
-
-
-# def create_data(path1, path2):
-#     file1 = open_file(path1)
-#     file2 = open_file(path2)
-#     if file1 is None or file2 is None:
-#         print('Incorrect file or files!')
-#         return None
-#     data = {'names': []}
-#     for key in file1:
-#         data[key] = {'first': file1[key]}
-#         data['names'].append(key)
-#     for key in file2:
-#         if key in data:
-#             data[key]['second'] = file2[key]
-#         else:
-#             data[key] = {'second': file2[key]}
-#             data['names'].append(key)
-#     return data
-#
-#
-# def compare_data(data):
-#     result = ['{']
-#     data['names'].sort()
-#     for key in data['names']:
-#         if 'first' in data[key] and 'second' in data[key]:
-#             if data[key]['first'] == data[key]['second']:
-#                 result.append(create_line(' ', key, data[key]['first']))
-#             else:
-#                 result.append(create_line('-', key, data[key]['first']))
-#                 result.append(create_line('+', key, data[key]['second']))
-#         if 'first' in data[key] and not ('second' in data[key]):
-#             result.append(create_line('-', key, data[key]['first']))
-#         if not ('first' in data[key]) and 'second' in data[key]:
-#             result.append(create_line('+', key, data[key]['second']))
-#     result.append('}')
-#     return result
-#
-#
-# def create_line(sign, name, value):
-#     if isinstance(value, bool):
-#         if value:
-#             value = 'true'
-# #         else:
-#             value = 'false'
-#     return f"  {sign} {name}: {value}"
