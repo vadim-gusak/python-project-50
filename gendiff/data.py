@@ -57,7 +57,7 @@ def is_node(node):
 
 
 def is_switch_to_node(node):
-    if node['type'] == 'to note':
+    if node['type'] == 'to node':
         return True
     return False
 

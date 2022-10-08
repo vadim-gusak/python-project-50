@@ -1,0 +1,10 @@
+{
+  - dir: {
+        name: long
+    }
+  - item: 12
+  + item: {
+        index: 55
+        log: 12
+    }
+}

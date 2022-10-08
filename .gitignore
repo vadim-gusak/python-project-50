@@ -5,3 +5,4 @@ gendiff/scripts/__pycache__/
 tests/__pycache__/
 /coverage.xml
 /.coverage
+/htmlcov
