@@ -8,30 +8,24 @@ def prepare_to_print_stylish(diff):
         result = []
         for item in nodes_sorted:
             if is_leaf(item):
-                line = make_line_leaf(item, step)
-                result.append(line)
+                result.append(make_line_leaf(item, step))
             elif is_node(item):
-                line = make_line_node(item, step)
-                result.append(line)
+                result.append(make_line_node(item, step))
                 children = get_children(item)
                 result.append(walk(children, step + 2))
                 result.append(step * '  ' + '    }')
             elif is_switch_to_node(item):
-                line = make_line_switch_to_node(item, step)
-                result.append(line)
+                result.append(make_line_switch_to_node(item, step))
                 children = get_children(item)
                 result.append(walk(children, step + 2))
                 result.append(step * '  ' + '    }')
             else:
-                line = make_line_node(item, step)
-                result.append(line)
+                result.append(make_line_node(item, step))
                 children = get_children(item)
                 result.append(walk(children, step + 2))
                 result.append(step * '  ' + '    }')
-                line = make_line_switch_to_leaf(item, step)
-                result.append(line)
-        result = '\n'.join(result)
-        return result
+                result.append(make_line_switch_to_leaf(item, step))
+        return '\n'.join(result)
     return '{\n' + walk(diff, 0) + '\n}'
 
 
@@ -56,7 +50,7 @@ def make_line_leaf(node, step):
     begin = f'{"  " * step}  '
     diff = get_diff(node)
     name = get_name(node)
-    value = str(fix_leaf_value(get_value(node)))
+    value = (get_value(node, fix_leaf_value))
     if diff is None:
         end = f'  {name}:' + paste_value(value)
     elif diff == 'added':
@@ -64,7 +58,7 @@ def make_line_leaf(node, step):
     elif diff == 'removed':
         end = f'- {name}:' + paste_value(value)
     else:
-        second_value = str(fix_leaf_value(get_second_value(node)))
+        second_value = get_second_value(node, fix_leaf_value)
         end = f'- {name}:{paste_value(value)}\n' + begin
         end += f'+ {name}:{paste_value(second_value)}'
     return begin + end
@@ -86,7 +80,7 @@ def make_line_node(node, step):
 def make_line_switch_to_node(node, step):
     begin = f'{"  " * step}  '
     name = get_name(node)
-    value = str(fix_leaf_value(get_value(node)))
+    value = get_value(node, fix_leaf_value)
     end = f'- {name}: {value}\n'
     end += begin + f'+ {name}: ' + '{'
     return begin + end
@@ -95,6 +89,6 @@ def make_line_switch_to_node(node, step):
 def make_line_switch_to_leaf(node, step):
     begin = f'{"  " * step}  '
     name = get_name(node)
-    value = str(fix_leaf_value(get_value(node)))
+    value = get_value(node, fix_leaf_value)
     end = f'+ {name}: {value}'
     return begin + end

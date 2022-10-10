@@ -45,59 +45,71 @@ def is_end(node):
 
 
 def is_leaf(node):
-    if node['type'] == 'leaf':
+    if node.get('type') == 'leaf':
         return True
     return False
 
 
 def is_node(node):
-    if node['type'] == 'node':
+    if node.get('type') == 'node':
         return True
     return False
 
 
 def is_switch_to_node(node):
-    if node['type'] == 'to node':
+    if node.get('type') == 'to node':
         return True
     return False
 
 
 def is_switch_to_leaf(node):
-    if node['type'] == 'to leaf':
+    if node.get('type') == 'to leaf':
         return True
     return False
 
 
 def get_name(node):
-    return node['name']
+    return node.get('name')
 
 
 def get_node_by_name(nodes, name):
     for item in nodes:
-        if item['name'] == name:
+        if item.get('name') == name:
             return item
     return None
 
 
-def get_value(node):
-    return node['value']
+def get_value(node, func_to_fix_value=lambda v: v):
+    return func_to_fix_value(node.get('value'))
 
 
-def get_second_value(node):
-    return node['second value']
+def get_second_value(node, func_to_fix_value=lambda v: v):
+    return func_to_fix_value(node.get('second value'))
 
 
 def get_children(node):
-    return node['children']
+    return node.get('children')
 
 
 def get_diff(node):
-    return node['diff']
+    return node.get('diff')
+
+
+def get_type(node):
+    return node.get('type')
 
 
 def add_new_value(node, value):
     node['second value'] = value
     return node
+
+
+def set_diff(node, diff):
+    node['diff'] = diff
+
+
+def set_children(node, children):
+    node['children'] = children
 
 
 def create_tree_from_file(node):

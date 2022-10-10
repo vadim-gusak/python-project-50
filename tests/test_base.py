@@ -67,3 +67,16 @@ def test_format():
     path2 = './tests/fixtures/json_test_file_1_2.json'
     assert generate_diff(path1, path2, 'lol') == result
 
+
+def test_generate_diff_json_format():
+    path1 = './tests/fixtures/json_test_file_1_1.json'
+    path2 = './tests/fixtures/json_test_file_1_2.json'
+    with open('./tests/fixtures/json_format_result_1.json') as result_file:
+        assert generate_diff(path1, path2, 'json') == result_file.read()
+
+
+def test_generate_diff_json_format_2():
+    path1 = './tests/fixtures/json_test_file_2_1.json'
+    path2 = './tests/fixtures/json_test_file_2_2.json'
+    with open('./tests/fixtures/json_format_result_2.json') as result_file:
+        assert generate_diff(path1, path2, 'json') == result_file.read()

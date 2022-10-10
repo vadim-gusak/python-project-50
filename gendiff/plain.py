@@ -7,20 +7,17 @@ def prepare_to_print_plaint(diff):
     result = list(map(lambda item: walk(item, ''), diff))
     result = [item for item in flatten(result) if item]
     result.sort()
-    result = '\n'.join(result)
-    return result
+    return '\n'.join(result)
 
 
 def walk(node, path):
     line = ''
     path = update_path(node, path)
     if is_node(node) and get_diff(node):
-        line = make_line_node_have_changes(node, path)
-        return line
+        return make_line_node_have_changes(node, path)
     if is_node(node):
         children = get_children(node)
-        lines = list(map(lambda item: walk(item, path), children))
-        return lines
+        return list(map(lambda item: walk(item, path), children))
     if is_leaf(node) and get_diff(node):
         line = make_line_leaf(node, path)
     if is_switch_to_node(node):
@@ -42,7 +39,7 @@ def update_path(node, path):
 def make_line_leaf(node, path):
     result = f"Property '{path}' was "
     diff = get_diff(node)
-    value = str(fix_leaf_value(get_value(node)))
+    value = get_value(node, fix_leaf_value)
     if diff == 'added':
         result += f'added with value: {value}'
         return result
@@ -50,7 +47,7 @@ def make_line_leaf(node, path):
         result += 'removed'
         return result
     if diff == 'switch':
-        second_value = fix_leaf_value(get_second_value(node))
+        second_value = get_second_value(node, fix_leaf_value)
         result += f'updated. From {value} to {second_value}'
         return result
 
