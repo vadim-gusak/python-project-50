@@ -43,6 +43,8 @@ def fix_leaf_value(value):
 def paste_value(value):
     if value == '':
         return value
+    if value == ' ':
+        return ''
     return ' ' + value
 
 
