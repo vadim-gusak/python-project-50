@@ -62,6 +62,7 @@ def make_line_leaf(node, step):
         second_value = get_second_value(node, fix_leaf_value)
         end = f'- {name}:{paste_value(value)}\n' + begin
         end += f'+ {name}:{paste_value(second_value)}'
+        print(f'name = {name}, value = "{value}"')
     return begin + end
 
 
