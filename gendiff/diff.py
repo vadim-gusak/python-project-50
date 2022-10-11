@@ -37,11 +37,8 @@ def create_diff(original_nodes_1, original_nodes_2):
             common_nodes.append(new_item)
         else:
             value = get_value(first_item, fix_value)
-            print('Записываю значение для:')
-            print(f'NAME:{name}  VALUE: "{value}"')
             new_item = make_leaf(name, value)
             value = get_value(second_item, fix_value)
-            print(f'NAME:{name}  SECOND VALUE: "{value}"')
             add_second_value(new_item, value)
             set_diff(new_item, 'switch')
             common_nodes.append(new_item)

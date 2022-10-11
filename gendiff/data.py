@@ -16,6 +16,7 @@ def open_file(path):
 
 
 def make_leaf(name, value):
+    value = fix_value(value)
     result = {'name': name, 'value': value, 'type': 'leaf'}
     return result
 
@@ -109,6 +110,14 @@ def set_diff(node, diff):
 
 def set_children(node, children):
     node['children'] = children
+
+
+def fix_value(value):
+    # if isinstance(value, bool) or value is None:
+    #     return value
+    if isinstance(value, str):
+        return value.strip()
+    return value
 
 
 def create_tree_from_file(node):
