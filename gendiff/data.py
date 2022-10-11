@@ -99,9 +99,8 @@ def get_type(node):
     return node.get('type')
 
 
-def add_new_value(node, value):
+def add_second_value(node, value):
     node['second value'] = value
-    return node
 
 
 def set_diff(node, diff):

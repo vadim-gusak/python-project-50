@@ -1,8 +1,8 @@
 import copy
 from gendiff.data import make_node, make_switch_to_leaf, make_switch_to_node
-from gendiff.data import is_leaf, is_node, get_node_by_name, add_new_value
+from gendiff.data import is_leaf, is_node, get_node_by_name, add_second_value
 from gendiff.data import get_value, set_diff, get_children, get_name
-from gendiff.data import set_children
+from gendiff.data import set_children, make_leaf
 
 
 def create_diff(original_nodes_1, original_nodes_2):
@@ -36,8 +36,10 @@ def create_diff(original_nodes_1, original_nodes_2):
             set_diff(new_item, 'switch')
             common_nodes.append(new_item)
         else:
-            value = get_value(second_item)
-            new_item = add_new_value(first_item, value)
+            value = get_value(first_item, fix_value)
+            new_item = make_leaf(name, value)
+            value = get_value(second_item, fix_value)
+            add_second_value(new_item, value)
             set_diff(new_item, 'switch')
             common_nodes.append(new_item)
     return not_common_nodes + common_nodes
@@ -67,3 +69,10 @@ def mark_node_diff(original_node, mark=None):
                                 get_children(node)))
         set_children(node, new_children)
     return node
+
+
+def fix_value(value):
+    if isinstance(value, bool) or value is None:
+        return value
+    result = str(value)
+    return result.strip()

@@ -37,11 +37,11 @@ def fix_leaf_value(value):
             return str('false')
     if value is None:
         return str('null')
-    return str(value)
+    result = str(value)
+    return result.strip()
 
 
 def paste_value(value):
-    value = value.strip()
     if value == '':
         return value
     return ' ' + value
