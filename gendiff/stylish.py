@@ -42,10 +42,9 @@ def fix_leaf_value(value):
 
 
 def paste_value(value):
-    if value == '':
-        return value
-    result = f' {value}'
-    return result
+    if value:
+        return f' {value}'
+    return value
 
 
 def make_line_leaf(node, step):

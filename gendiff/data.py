@@ -18,8 +18,9 @@ def open_file(path):
 def make_leaf(name, value):
     value = fix_value(value)
     result = {'name': name, 'value': value, 'type': 'leaf'}
-    print('СОЗДАЮ УЗЕЛ:')
-    print(result)
+    if name == 'bar' or name == 'default':
+        print('СОЗДАЮ УЗЕЛ:')
+        print(result)
     return result
 
 
@@ -105,6 +106,11 @@ def get_type(node):
 
 
 def add_second_value(node, value):
+    value = fix_value(value)
+    name = get_name(node)
+    if name == 'bar' or name == 'default':
+        print('ЗАПИСЫВАЮ ВТОРОЕ ЗНАЧЕНИЕ')
+        print(f'{name}="{value}"')
     node['second value'] = value
 
 
