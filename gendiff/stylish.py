@@ -45,7 +45,6 @@ def paste_value(value):
     if value == '':
         return value
     result = f' {value}'
-    print(f'СЕЙЧАС ВСТАВЛЮ ВОТ ЭТО ="{result}"')
     return result
 
 
@@ -61,15 +60,11 @@ def make_line_leaf(node, step):
     elif diff == 'removed':
         end = f'- {name}:' + paste_value(value)
     else:
-        value2 = get_value(node)
-        second_value2 = get_second_value(node)
         second_value = get_second_value(node, fix_leaf_value)
-        print(f'name = {name}, value = "{value2}"')
-        print(f'name = {name}, second value = "{second_value2}"')
+        print(f'В ИТОГЕ БУДЕТ ТАК =/{name}:{paste_value(value)}')
+        print(f'ВТОРОЕ ЗНАЧЕНИЕ =/{name}:{paste_value(second_value)}')
         end = f'- {name}:{paste_value(value)}\n' + begin
         end += f'+ {name}:{paste_value(second_value)}'
-        print(f'name x 2 = {name}, value = "{value}"')
-        print(f'name x 2 = {name}, second value = "{second_value}"')
     return begin + end
 
 
