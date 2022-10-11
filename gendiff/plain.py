@@ -41,10 +41,6 @@ def make_line_leaf(node, path):
     result = f"Property '{path}' was "
     diff = get_diff(node)
     value = get_value(node, fix_leaf_value)
-    print(f'name={get_name(node)}')
-    print(f'Делаю линию со значением={value}')
-    print('TYPE IS')
-    print(type(value))
     if diff == 'added':
         result += f'added with value: {value}'
         return result

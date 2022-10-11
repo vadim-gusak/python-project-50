@@ -74,5 +74,4 @@ def mark_node_diff(original_node, mark=None):
 def fix_value(value):
     if isinstance(value, bool) or value is None:
         return value
-    result = str(value)
-    return result.strip()
+    return value

@@ -16,7 +16,7 @@ def open_file(path):
 
 
 def make_leaf(name, value):
-    value = fix_value(value)
+    value = strip_string_value(value)
     result = {'name': name, 'value': value, 'type': 'leaf'}
     return result
 
@@ -27,14 +27,14 @@ def make_node(name, children):
 
 
 def make_switch_to_leaf(name, children, value):
-    value = fix_value(value)
+    value = strip_string_value(value)
     result = {'name': name, 'type': 'to leaf',
               'children': children, 'value': value}
     return result
 
 
 def make_switch_to_node(name, children, value):
-    value = fix_value(value)
+    value = strip_string_value(value)
     result = {'name': name, 'type': 'to node',
               'children': children, 'value': value}
     return result
@@ -103,7 +103,7 @@ def get_type(node):
 
 
 def add_second_value(node, value):
-    value = fix_value(value)
+    value = strip_string_value(value)
     node['second value'] = value
 
 
@@ -115,7 +115,7 @@ def set_children(node, children):
     node['children'] = children
 
 
-def fix_value(value):
+def strip_string_value(value):
     if isinstance(value, str):
         return value.strip()
     return value
