@@ -104,11 +104,7 @@ def get_type(node):
 
 def add_second_value(node, value):
     value = fix_value(value)
-    name = get_name(node)
     node['second value'] = value
-    if name == 'bar' or name == 'default':
-        print(f'ЗАПИСЫВАЮ ВТОРОЕ ЗНАЧЕНИЕ в Узел {name}')
-        print(node)
 
 
 def set_diff(node, diff):

@@ -41,29 +41,21 @@ def fix_leaf_value(value):
     return result.strip()
 
 
-def paste_value(value):
-    if value:
-        return f' {value}'
-    return value
-
-
 def make_line_leaf(node, step):
     begin = f'{"  " * step}  '
     diff = get_diff(node)
     name = get_name(node)
     value = (get_value(node, fix_leaf_value))
     if diff is None:
-        end = f'  {name}:' + paste_value(value)
+        end = f'  {name}: {value}'
     elif diff == 'added':
-        end = f'+ {name}:' + paste_value(value)
+        end = f'+ {name}: {value}'
     elif diff == 'removed':
-        end = f'- {name}:' + paste_value(value)
+        end = f'- {name}: {value}'
     else:
         second_value = get_second_value(node, fix_leaf_value)
-        end = f'- {name}:{paste_value(value)}\n' + begin
-        end += f'+ {name}:{paste_value(second_value)}'
-        print('ДВОЙНАЯ ЛИНИЯ ПОЛУЧИЛАСЬ ТАКОЙ:')
-        print(begin + end)
+        end = f'- {name}: {value}\n' + begin
+        end += f'+ {name}: {second_value}'
     return begin + end
 
 
