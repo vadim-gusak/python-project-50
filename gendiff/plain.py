@@ -7,6 +7,7 @@ def prepare_to_print_plaint(diff):
     result = list(map(lambda item: walk(item, ''), diff))
     result = [item for item in flatten(result) if item]
     result.sort()
+    print('\n'.join(result))
     return '\n'.join(result)
 
 
@@ -83,7 +84,9 @@ def fix_leaf_value(value):
             return str('false')
     if value is None:
         return str('null')
-    return "'" + str(value) + "'"
+    if isinstance(value, str):
+        return "'" + value + "'"
+    return str(value)
 
 
 def flatten(some_list):
