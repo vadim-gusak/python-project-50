@@ -61,8 +61,6 @@ def make_line_leaf(node, step):
         end = f'- {name}:' + paste_value(value)
     else:
         second_value = get_second_value(node, fix_leaf_value)
-        print(f'В ИТОГЕ БУДЕТ ТАК =/{name}:{paste_value(value)}')
-        print(f'ВТОРОЕ ЗНАЧЕНИЕ =/{name}:{paste_value(second_value)}')
         end = f'- {name}:{paste_value(value)}\n' + begin
         end += f'+ {name}:{paste_value(second_value)}'
     return begin + end

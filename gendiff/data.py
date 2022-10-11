@@ -18,6 +18,8 @@ def open_file(path):
 def make_leaf(name, value):
     value = fix_value(value)
     result = {'name': name, 'value': value, 'type': 'leaf'}
+    print('СОЗДАЮ УЗЕЛ:')
+    print(result)
     return result
 
 
@@ -27,12 +29,14 @@ def make_node(name, children):
 
 
 def make_switch_to_leaf(name, children, value):
+    value = fix_value(value)
     result = {'name': name, 'type': 'to leaf',
               'children': children, 'value': value}
     return result
 
 
 def make_switch_to_node(name, children, value):
+    value = fix_value(value)
     result = {'name': name, 'type': 'to node',
               'children': children, 'value': value}
     return result
