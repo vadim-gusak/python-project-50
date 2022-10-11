@@ -7,7 +7,6 @@ def prepare_to_print_plaint(diff):
     result = list(map(lambda item: walk(item, ''), diff))
     result = [item for item in flatten(result) if item]
     result.sort()
-    print('\n'.join(result))
     return '\n'.join(result)
 
 
