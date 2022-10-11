@@ -44,7 +44,9 @@ def fix_leaf_value(value):
 def paste_value(value):
     if value == '':
         return value
-    return ' ' + value
+    result = f' {value}'
+    print(f'СЕЙЧАС ВСТАВЛЮ ВОТ ЭТО ="{result}"')
+    return result
 
 
 def make_line_leaf(node, step):
