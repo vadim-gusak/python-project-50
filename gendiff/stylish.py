@@ -59,9 +59,11 @@ def make_line_leaf(node, step):
     elif diff == 'removed':
         end = f'- {name}:' + paste_value(value)
     else:
+        value2 = get_value(node)
+        second_value2 = get_second_value(node)
         second_value = get_second_value(node, fix_leaf_value)
-        print(f'name = {name}, value = "{value}"')
-        print(f'name = {name}, second value = "{second_value}"')
+        print(f'name = {name}, value = "{value2}"')
+        print(f'name = {name}, second value = "{second_value2}"')
         end = f'- {name}:{paste_value(value)}\n' + begin
         end += f'+ {name}:{paste_value(second_value)}'
         print(f'name x 2 = {name}, value = "{value}"')
