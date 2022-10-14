@@ -21,3 +21,6 @@ test:
 
 test-cov:
 		poetry run pytest --cov=gendiff --cov-report xml
+
+gendiff-test:
+		poetry run gendiff tests/fixtures/json_test_file_1_1.json tests/fixtures/json_test_file_1_2.json
