@@ -1,4 +1,5 @@
 from gendiff.base import generate_diff
+from gendiff.parser import open_, parse
 from pytest import mark
 
 
@@ -30,30 +31,28 @@ WRONG_FILE_FORMAT_2 = 'Wrong second file format!'
                    (PATH_YML_FLAT_1, PATH_YML_FLAT_2, PATH_YML_FLAT_RESULT),
                    (PATH_JSON_1_1, PATH_JSON_1_2, PATH_JSON_1_RESULT),
                    (PATH_JSON_2_1, PATH_JSON_2_2, PATH_JSON_2_RESULT)])
-def test_generate_diff_(file_path_1, file_path_2, path_to_result):
+def test_generate_diff(file_path_1, file_path_2, path_to_result):
+    data_1 = parse(*open_(file_path_1))
+    data_2 = parse(*open_(file_path_2))
     with open(path_to_result) as result_file:
-        assert generate_diff(file_path_1, file_path_2) == result_file.read()
+        assert generate_diff(data_1, data_2) == result_file.read()
 
 
 @mark.parametrize('file_path_1, file_path_2, print_format, path_to_result',
                   [(PATH_YML_1, PATH_YML_2, 'stylish', PATH_YAML_RESULT),
-                   (PATH_JSON_1_1, PATH_JSON_1_2, 'plain',PLAIN_1_RESULT),
-                   (PATH_JSON_2_1, PATH_JSON_2_2, 'plain',PLAIN_2_RESULT),
+                   (PATH_JSON_1_1, PATH_JSON_1_2, 'plain', PLAIN_1_RESULT),
+                   (PATH_JSON_2_1, PATH_JSON_2_2, 'plain', PLAIN_2_RESULT),
                    (PATH_JSON_1_1, PATH_JSON_1_2, 'json', JSON_FORMAT_RESULT_1),
                    (PATH_JSON_2_1, PATH_JSON_2_2, 'json', JSON_FORMAT_RESULT_2)])
-def test_generate_diff(file_path_1, file_path_2, print_format, path_to_result):
+def test_generate_diff_format(file_path_1, file_path_2, print_format, path_to_result):
+    data_1 = parse(*open_(file_path_1))
+    data_2 = parse(*open_(file_path_2))
     with open(path_to_result) as result_file:
-        assert generate_diff(file_path_1,
-                             file_path_2,
+        assert generate_diff(data_1,
+                             data_2,
                              print_format) == result_file.read()
 
 
-def test_open_file():
-    wrong_file_path = './tests/fixtures/json_test_file_1_1'
-    assert generate_diff(wrong_file_path, PATH_JSON_1_2) == WRONG_FILE_FORMAT_1
-    assert generate_diff(PATH_JSON_1_1, wrong_file_path) == WRONG_FILE_FORMAT_2
-
-
-def test_format():
-    result = "Wrong format!"
-    assert generate_diff(PATH_JSON_1_1, PATH_JSON_1_2, 'lol') == result
+def test_parse():
+    assert parse(*open_(PATH_JSON_1_RESULT)) is None
+    assert parse(*open_('https://ru.hexlet.io')) is None

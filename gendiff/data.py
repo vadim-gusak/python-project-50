@@ -1,18 +1,4 @@
-import json
-import yaml
 import copy
-
-
-def open_file(path):
-    if path.endswith('.json'):
-        with open(path, 'r') as stream:
-            file = json.load(stream)
-            return file
-    if path.endswith('.yml') or path.endswith('.yaml'):
-        with open(path, 'r') as stream:
-            file = yaml.load(stream, yaml.Loader)
-            return file
-    return None
 
 
 def make_leaf(name, value):
@@ -121,7 +107,7 @@ def strip_string_value(value):
     return value
 
 
-def create_tree_from_file(node):
+def create_tree(node):
     node_copy = copy.deepcopy(node)
     leafs = [make_leaf(key, value)
              for key, value in node_copy.items()
@@ -131,6 +117,6 @@ def create_tree_from_file(node):
     nodes = []
     for key, value in node_copy.items():
         if isinstance(value, dict):
-            children = create_tree_from_file(value)
+            children = create_tree(value)
             nodes.append(make_node(key, children))
     return leafs + nodes
