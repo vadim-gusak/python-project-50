@@ -55,7 +55,7 @@ gendiff -f stylish file1.json file2.json
 ```
 Пример в виде аскинемы:
 
-<a href="https://asciinema.org/a/527492" target="_blank"><img width="1280" height="720" src="https://asciinema.org/a/527492.svg" /></a>
+<a href="https://asciinema.org/a/527492" target="_blank"><img src="https://asciinema.org/a/527492.svg" /></a>
 
 Форматер **plain**:
 ```commandline
@@ -71,7 +71,7 @@ Property 'verbose' was added with value: true
 ```
 Пример в виде аскинемы:
 
-<a href="https://asciinema.org/a/527493" target="_blank"><img width="1280" height="720" src="https://asciinema.org/a/527493.svg" /></a>
+<a href="https://asciinema.org/a/527493" target="_blank"><img src="https://asciinema.org/a/527493.svg" /></a>
 
 Также доступен вывод в виде **json** файла:
 ```commandline
@@ -89,7 +89,7 @@ gendiff -f json file1.json file2.json
 ```
 Пример в виде аскинемы:
 
-<a href="https://asciinema.org/a/527494" target="_blank"><img width="1280" height="720" src="https://asciinema.org/a/527494.svg" /></a>
+<a href="https://asciinema.org/a/527494" target="_blank"><img src="https://asciinema.org/a/527494.svg" /></a>
 
 Вы можете использовать данную программу, как пакет к своему проекту. Функция **generate_diff** подготовлена для импорта.
 Она ожидакт на вход три параметра:
