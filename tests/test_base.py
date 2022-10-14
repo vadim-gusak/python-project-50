@@ -1,5 +1,5 @@
-from gendiff.base import generate_diff
-from gendiff.parser import open_, parse
+from gendiff.base import generate_diff, open_
+from gendiff.parser import parse
 from pytest import mark
 
 
@@ -32,10 +32,8 @@ WRONG_FILE_FORMAT_2 = 'Wrong second file format!'
                    (PATH_JSON_1_1, PATH_JSON_1_2, PATH_JSON_1_RESULT),
                    (PATH_JSON_2_1, PATH_JSON_2_2, PATH_JSON_2_RESULT)])
 def test_generate_diff(file_path_1, file_path_2, path_to_result):
-    data_1 = parse(*open_(file_path_1))
-    data_2 = parse(*open_(file_path_2))
     with open(path_to_result) as result_file:
-        assert generate_diff(data_1, data_2) == result_file.read()
+        assert generate_diff(file_path_1, file_path_2) == result_file.read()
 
 
 @mark.parametrize('file_path_1, file_path_2, print_format, path_to_result',
@@ -45,11 +43,9 @@ def test_generate_diff(file_path_1, file_path_2, path_to_result):
                    (PATH_JSON_1_1, PATH_JSON_1_2, 'json', JSON_FORMAT_RESULT_1),
                    (PATH_JSON_2_1, PATH_JSON_2_2, 'json', JSON_FORMAT_RESULT_2)])
 def test_generate_diff_format(file_path_1, file_path_2, print_format, path_to_result):
-    data_1 = parse(*open_(file_path_1))
-    data_2 = parse(*open_(file_path_2))
     with open(path_to_result) as result_file:
-        assert generate_diff(data_1,
-                             data_2,
+        assert generate_diff(file_path_1,
+                             file_path_2,
                              print_format) == result_file.read()
 
 
