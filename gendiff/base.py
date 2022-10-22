@@ -11,15 +11,15 @@ def open_(path):
     if isfile(path):
         with open(path, 'r') as stream:
             text = stream.read()
-    else:
-        return None, None
     if path.endswith('.json'):
         data_format = 'json'
     elif path.endswith('.yml') or path.endswith('.yaml'):
         data_format = 'yml'
-    else:
-        return text, None
-    return text, data_format
+    try:
+        return text, data_format
+    except UnboundLocalError as e:
+        print('Check file!')
+        return '{}','json'
 
 
 def generate_diff(path_1, path_2, print_format='stylish'):
