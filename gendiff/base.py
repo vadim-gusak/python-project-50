@@ -17,9 +17,9 @@ def open_(path):
         data_format = 'yml'
     try:
         return text, data_format
-    except UnboundLocalError as e:
+    except UnboundLocalError:
         print('Check file!')
-        return '{}','json'
+        return '{}', 'json'
 
 
 def generate_diff(path_1, path_2, print_format='stylish'):
