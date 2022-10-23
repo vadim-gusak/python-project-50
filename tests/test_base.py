@@ -38,6 +38,8 @@ def test_generate_diff(file_path_1, file_path_2, path_to_result):
 
 @mark.parametrize('file_path_1, file_path_2, print_format, path_to_result',
                   [(PATH_YML_1, PATH_YML_2, 'stylish', PATH_YAML_RESULT),
+                   (PATH_YML_1, PATH_YML_2, 'plain', PLAIN_1_RESULT),
+                   (PATH_YML_1, PATH_YML_2, 'json', JSON_FORMAT_RESULT_1),
                    (PATH_JSON_1_1, PATH_JSON_1_2, 'plain', PLAIN_1_RESULT),
                    (PATH_JSON_2_1, PATH_JSON_2_2, 'plain', PLAIN_2_RESULT),
                    (PATH_JSON_1_1, PATH_JSON_1_2, 'json', JSON_FORMAT_RESULT_1),
@@ -56,5 +58,6 @@ def test_parse():
     assert parse('any text data', 'wrong format') == res
     assert parse(None, 'yml') == res
     assert parse(None, 'json') == res
+    assert parse(None, None) == res
     assert parse('some not yml text data', 'yml') == res
     assert parse('some not json text data', 'json') == res
