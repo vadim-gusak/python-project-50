@@ -73,7 +73,7 @@ def test_create_diff_clear():
     data_2 = parse(*open_(PATH_JSON_1_2))
     tree_2 = create_tree(data_2)
     tree_2_copy = copy.deepcopy(tree_2)
-    diff = create_diff(tree_1, tree_2)
+    create_diff(tree_1, tree_2)
     assert tree_1 == tree_1_copy
     assert tree_2 == tree_2_copy
 
