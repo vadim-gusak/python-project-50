@@ -76,4 +76,3 @@ def test_create_diff_clear():
     create_diff(tree_1, tree_2)
     assert tree_1 == tree_1_copy
     assert tree_2 == tree_2_copy
-
