@@ -93,7 +93,7 @@ def add_second_value(node, value):
     node['second value'] = value
 
 
-def set_diff(node, diff):
+def set_diff(node, diff=None):
     node['diff'] = diff
 
 
