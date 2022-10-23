@@ -1,6 +1,9 @@
 from gendiff.base import generate_diff, open_
 from gendiff.parser import parse
+from gendiff.data import create_tree
+from gendiff.diff import create_diff
 from pytest import mark
+import copy
 
 
 PATH_JSON_FLAT_1 = './tests/fixtures/json_test_flat_1.json'
@@ -61,3 +64,16 @@ def test_parse():
     assert parse(None, None) == res
     assert parse('some not yml text data', 'yml') == res
     assert parse('some not json text data', 'json') == res
+
+
+def test_create_diff_clear():
+    data_1 = parse(*open_(PATH_JSON_1_1))
+    tree_1 = create_tree(data_1)
+    tree_1_copy = copy.deepcopy(tree_1)
+    data_2 = parse(*open_(PATH_JSON_1_2))
+    tree_2 = create_tree(data_2)
+    tree_2_copy = copy.deepcopy(tree_2)
+    diff = create_diff(tree_1, tree_2)
+    assert tree_1 == tree_1_copy
+    assert tree_2 == tree_2_copy
+
