@@ -3,7 +3,14 @@ import copy
 
 def make_leaf(name, value):
     value = strip_string_value(value)
-    result = {'name': name, 'value': value, 'type': 'leaf'}
+    if isinstance(value, bool):
+        if value:
+            value = 'true'
+        else:
+            value = 'false'
+    if value is None:
+        value = 'null'
+    result = {'name': name, 'value': str(value), 'type': 'leaf'}
     return result
 
 
@@ -77,7 +84,7 @@ def get_second_value(node, func_to_fix_value=lambda v: v):
 
 
 def get_children(node):
-    return node.get('children')
+    return node.get('children', list())
 
 
 def get_diff(node):
@@ -99,6 +106,30 @@ def set_diff(node, diff=None):
 
 def set_children(node, children):
     node['children'] = children
+
+
+def set_value(node, value):
+    node['value'] = value
+
+
+def set_value_deep(node, value=None):
+    if value is None:
+        value = get_value(node)
+        node['value'] = value, value
+    else:
+        node['value'] = value
+    if is_node(node):
+        children = get_children(node)
+        for item in children:
+            set_value_deep(item)
+
+
+def set_diff_deep(node, diff=None):
+    node['diff'] = diff
+    if is_node(node):
+        children = get_children(node)
+        for item in children:
+            set_diff_deep(item, diff)
 
 
 def strip_string_value(value):
