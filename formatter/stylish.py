@@ -1,4 +1,4 @@
-from gendiff.data import get_type, get_name_type_value, get_name
+from gendiff.data import get_name_type_value, get_name
 
 
 def prepare_to_print_stylish(diff):
@@ -8,25 +8,19 @@ def prepare_to_print_stylish(diff):
 
 
 def walk(item, step):
-    type_ = get_type(item)
+    name, type_, value = get_name_type_value(item)
     lines = ''
     if type_ == 'nested':
-        lines += make_lines_nested(item, step)
+        lines += make_line(step, ' ', name, '{') + '\n'
+        value_sorted = sorted(value, key=get_name)
+        walk_result = list(map(lambda i: walk(i, step + 2), value_sorted))
+        lines += '\n'.join(walk_result)
+        lines += f"\n{step * '  '}    " + '}'
     elif type_ == 'added' or type_ == 'removed' or type_ == 'unchanged':
         lines += make_lines_added_removed_or_unchanged(item, step)
     if type_ == 'changed':
         lines += make_lines_changed(item, step)
     return lines
-
-
-def make_lines_nested(item, step):
-    name, _, value = get_name_type_value(item)
-    result = make_line(step, ' ', name, '{') + '\n'
-    value_sorted = sorted(value, key=get_name)
-    walk_result = list(map(lambda i: walk(i, step + 2), value_sorted))
-    result += '\n'.join(walk_result)
-    result += f"\n{step * '  '}    " + '}'
-    return result
 
 
 def make_lines_added_removed_or_unchanged(item, step):
@@ -37,28 +31,31 @@ def make_lines_added_removed_or_unchanged(item, step):
     elif type_ == 'removed':
         sign = '-'
     if isinstance(value, dict):
-        return make_line(step, sign, name, '{\n') + \
-               make_lines_dicts(step + 2, value) + f"\n{step * '    '}    " + '}'
+        result = make_line(step, sign, name, '{\n')
+        result += make_lines_dicts(step + 2, value)
+        result += f"\n{step * '    '}    " + '}'
+        return result
     return make_line(step, sign, name, value)
 
 
 def make_lines_changed(item, step):
     name, type_, value = get_name_type_value(item)
     value_1, value_2 = value
+    result = ''
     if not isinstance(value_1, dict) and not isinstance(value_2, dict):
-        return make_line(step, '-', name, f'{value_1}\n') + \
-               make_line(step, '+', name, value_2)
+        result = make_line(step, '-', name, f'{value_1}\n')
+        result += make_line(step, '+', name, value_2)
     elif isinstance(value_1, dict):
-        return make_line(step, '-', name, '{\n') + \
-               make_lines_dicts(step + 2, value_1) + '\n' + \
-               f"\n{step * '  '}    " + '}\n' + \
-               make_line(step, '+', name, value_2)
+        result = make_line(step, '-', name, '{\n')
+        result += make_lines_dicts(step + 2, value_1)
+        result += f"\n{step * '  '}    " + '}\n'
+        result += make_line(step, '+', name, value_2)
     elif isinstance(value_2, dict):
-        return make_line(step, '-', name, f'{value_1}\n') + \
-               make_line(step, '+', name, '{\n') + \
-               make_lines_dicts(step + 2, value_2) + \
-               f"\n{step * '  '}    " + '}'
-    return ''
+        result = make_line(step, '-', name, f'{value_1}\n')
+        result += make_line(step, '+', name, '{\n')
+        result += make_lines_dicts(step + 2, value_2)
+        result += f"\n{step * '  '}    " + '}'
+    return result
 
 
 def make_line(step, sign, name, end):
