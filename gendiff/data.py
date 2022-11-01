@@ -8,6 +8,8 @@ def fix_value(value):
             return 'false'
     elif value is None:
         return 'null'
+    elif isinstance(value, str):
+        return value.strip()
     return value
 
 
