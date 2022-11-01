@@ -1,7 +1,9 @@
 from gendiff.base import generate_diff, open_
 from gendiff.parser import parse
-from gendiff.data import create_tree
 from gendiff.diff import create_diff
+from formatter.stylish import prepare_to_print_stylish
+from formatter.plain import prepare_to_print_plaint
+from formatter.json import prepare_to_print_json_format
 from pytest import mark
 import copy
 
@@ -68,11 +70,21 @@ def test_parse():
 
 def test_create_diff_clear():
     data_1 = parse(*open_(PATH_JSON_1_1))
-    tree_1 = create_tree(data_1)
-    tree_1_copy = copy.deepcopy(tree_1)
+    data_1_copy = copy.deepcopy(data_1)
     data_2 = parse(*open_(PATH_JSON_1_2))
-    tree_2 = create_tree(data_2)
-    tree_2_copy = copy.deepcopy(tree_2)
-    create_diff(tree_1, tree_2)
-    assert tree_1 == tree_1_copy
-    assert tree_2 == tree_2_copy
+    data_2_copy = copy.deepcopy(data_2)
+    create_diff(data_1, data_2)
+    assert data_1 == data_1_copy
+    assert data_2 == data_2_copy
+
+
+def test_prepare_to_print_clear():
+    data_1 = parse(*open_(PATH_JSON_1_1))
+    data_2 = parse(*open_(PATH_JSON_1_2))
+    diff = create_diff(data_1, data_2)
+    diff_copy = copy.deepcopy(diff)
+    prepare_to_print_stylish(diff)
+    prepare_to_print_plaint(diff)
+    prepare_to_print_json_format(diff)
+    assert diff == diff_copy
+
