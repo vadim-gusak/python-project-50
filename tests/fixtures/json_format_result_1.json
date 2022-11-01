@@ -3,7 +3,7 @@
     "follow_added": false,
     "setting1": "Value 1",
     "setting2_removed": 200,
-    "setting3": true,
+    "setting3_old": true,
     "setting3_updated": null,
     "setting4_added": "blah blah",
     "setting5_added": {
@@ -11,7 +11,7 @@
     },
     "setting6": {
       "doge": {
-        "wow": "",
+        "wow_old": "",
         "wow_updated": "so much"
       },
       "key": "value",
@@ -19,10 +19,10 @@
     }
   },
   "group1": {
-    "baz": "bas",
+    "baz_old": "bas",
     "baz_updated": "bars",
     "foo": "bar",
-    "nest": {
+    "nest_old": {
       "key": "value"
     },
     "nest_updated": "str"
