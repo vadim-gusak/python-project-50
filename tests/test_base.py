@@ -87,4 +87,3 @@ def test_prepare_to_print_clear():
     prepare_to_print_plaint(diff)
     prepare_to_print_json_format(diff)
     assert diff == diff_copy
-
