@@ -36,9 +36,10 @@ def make_lines_added_removed_or_unchanged(item, step):
         sign = '_removed'
     if isinstance(value, dict):
         result = make_line(step, sign, name, '{\n')
-        result += make_lines_dicts(step + 2, value)
+        result += make_lines_dicts(step + 1, value)
         result += f"\n{step * '  '}" + '}'
         return result
+    value = update_value(value)
     return make_line(step, sign, name, value)
 
 
@@ -48,19 +49,19 @@ def make_lines_changed(item, step):
     result = ''
     if not isinstance(value_1, dict) and not isinstance(value_2, dict):
         value_1, value_2 = update_value(value_1), update_value(value_2)
-        result = make_line(step, '_old', name, f'{value_1}\n')
+        result = make_line(step, '_old', name, f'{value_1},\n')
         result += make_line(step, '_updated', name, value_2)
     elif isinstance(value_1, dict):
         value_2 = update_value(value_2)
         result = make_line(step, '_old', name, '{\n')
-        result += make_lines_dicts(step + 2, value_1)
-        result += f"\n{step * '  '}" + '}\n'
+        result += make_lines_dicts(step + 1, value_1)
+        result += f"\n{step * '  '}" + '},\n'
         result += make_line(step, '_updated', name, value_2)
     elif isinstance(value_2, dict):
         value_1 = update_value(value_1)
-        result = make_line(step, '_old', name, f'{value_1}\n')
+        result = make_line(step, '_old', name, f'{value_1},\n')
         result += make_line(step, '_updated', name, '{\n')
-        result += make_lines_dicts(step + 2, value_2)
+        result += make_lines_dicts(step + 1, value_2)
         result += f"\n{step * '  '}" + '}'
     return result
 

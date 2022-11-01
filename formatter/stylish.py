@@ -33,7 +33,7 @@ def make_lines_added_removed_or_unchanged(item, step):
     if isinstance(value, dict):
         result = make_line(step, sign, name, '{\n')
         result += make_lines_dicts(step + 2, value)
-        result += f"\n{step * '    '}    " + '}'
+        result += f"\n{step * '  '}    " + '}'
         return result
     return make_line(step, sign, name, value)
 
