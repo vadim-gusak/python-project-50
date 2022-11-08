@@ -1,9 +1,7 @@
 from os.path import isfile
 from gendiff.diff import create_diff
 from gendiff.parser import parse
-from formatter.plain import prepare_to_print_plaint
-from formatter.stylish import prepare_to_print_stylish
-from formatter.json import prepare_to_print_json_format
+from formatter.base import prepare_to_print
 
 
 def open_(path):
@@ -25,10 +23,5 @@ def generate_diff(path_1, path_2, print_format='stylish'):
     data_1 = parse(*open_(path_1))
     data_2 = parse(*open_(path_2))
     diff = create_diff(data_1, data_2)
-    if print_format == 'plain':
-        result = prepare_to_print_plaint(diff)
-    elif print_format == 'json':
-        result = prepare_to_print_json_format(diff)
-    else:
-        result = prepare_to_print_stylish(diff)
+    result = prepare_to_print(diff, print_format)
     return result
