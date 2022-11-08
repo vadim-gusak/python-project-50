@@ -35,6 +35,7 @@ def make_lines_added_removed_or_unchanged(item, step):
         result += make_lines_dicts(step + 2, value)
         result += f"\n{step * '  '}    " + '}'
         return result
+    value = update_value(value)
     return make_line(step, sign, name, value)
 
 
@@ -43,14 +44,18 @@ def make_lines_changed(item, step):
     value_1, value_2 = value
     result = ''
     if not isinstance(value_1, dict) and not isinstance(value_2, dict):
+        value_1 = update_value(value_1)
+        value_2 = update_value(value_2)
         result = make_line(step, '-', name, f'{value_1}\n')
         result += make_line(step, '+', name, value_2)
     elif isinstance(value_1, dict):
+        value_2 = update_value(value_2)
         result = make_line(step, '-', name, '{\n')
         result += make_lines_dicts(step + 2, value_1)
         result += f"\n{step * '  '}    " + '}\n'
         result += make_line(step, '+', name, value_2)
     elif isinstance(value_2, dict):
+        value_1 = update_value(value_1)
         result = make_line(step, '-', name, f'{value_1}\n')
         result += make_line(step, '+', name, '{\n')
         result += make_lines_dicts(step + 2, value_2)
@@ -73,3 +78,13 @@ def make_lines_dicts(step, dicts):
             continue
         result.append(make_line(step, ' ', key, value))
     return '\n'.join(result)
+
+
+def update_value(value):
+    if isinstance(value, bool):
+        return 'true' if value else 'false'
+    elif value is None:
+        return 'null'
+    elif isinstance(value, str):
+        return value.strip()
+    return value

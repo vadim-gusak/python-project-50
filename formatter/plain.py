@@ -66,8 +66,10 @@ def make_line_changed(item, path):
 
 
 def update_value(value):
-    if value == 'true' or value == 'false' or value == 'null':
-        return value
-    if isinstance(value, str):
+    if isinstance(value, bool):
+        return 'true' if value else 'false'
+    elif value is None:
+        return 'null'
+    elif isinstance(value, str):
         return f"'{value.strip()}'"
     return str(value)
