@@ -57,15 +57,7 @@ def test_generate_diff_format(file_path_1, file_path_2, print_format, path_to_re
 
 
 def test_parse():
-    res = dict()
-    assert parse(*open_(PATH_JSON_1_RESULT)) == res
-    assert parse(*open_('https://ru.hexlet.io')) == res
-    assert parse('any text data', 'wrong format') == res
-    assert parse(None, 'yml') == res
-    assert parse(None, 'json') == res
-    assert parse(None, None) == res
-    assert parse('some not yml text data', 'yml') == res
-    assert parse('some not json text data', 'json') == res
+    assert parse(*open_(PATH_JSON_1_RESULT)) == ''
 
 
 def test_create_diff_clear():

@@ -5,18 +5,15 @@ from formatter.base import prepare_to_print
 
 
 def open_(path):
-    if isfile(path):
-        with open(path, 'r') as stream:
-            text = stream.read()
+    with open(path, 'r') as stream:
+        text = stream.read()
     if path.endswith('.json'):
         data_format = 'json'
     elif path.endswith('.yml') or path.endswith('.yaml'):
         data_format = 'yml'
-    try:
-        return text, data_format
-    except UnboundLocalError:
-        print('Check file!')
-        return '{}', 'json'
+    else:
+        data_format = ''
+    return text, data_format
 
 
 def generate_diff(path_1, path_2, print_format='stylish'):
