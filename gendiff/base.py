@@ -1,4 +1,3 @@
-from os.path import isfile
 from gendiff.diff import create_diff
 from gendiff.parser import parse
 from formatter.base import prepare_to_print
