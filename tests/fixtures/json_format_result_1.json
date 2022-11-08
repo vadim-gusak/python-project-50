@@ -2,7 +2,7 @@
   {
     "common": [
       {
-        "follow_added": "false"
+        "follow_added": false
       },
       {
         "setting1": "Value 1"
@@ -11,8 +11,8 @@
         "setting2_removed": 200
       },
       {
-        "setting3_old": "true",
-        "setting3_updated": "null"
+        "setting3_old": true,
+        "setting3_updated": null
       },
       {
         "setting4_added": "blah blah"
@@ -27,7 +27,7 @@
           {
             "doge": [
               {
-                "wow_old": "",
+                "wow_old": "     ",
                 "wow_updated": "so much"
               }
             ]
