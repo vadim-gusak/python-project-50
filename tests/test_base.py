@@ -57,7 +57,7 @@ def test_generate_diff_format(file_path_1, file_path_2, print_format, path_to_re
 
 
 def test_parse():
-    assert parse(*open_(PATH_JSON_1_RESULT)) == ''
+    assert parse(*open_(PATH_JSON_1_RESULT)) == dict()
 
 
 def test_create_diff_clear():

@@ -8,5 +8,5 @@ def parse(data, data_format):
     elif data and data_format == 'yml':
         result = yaml.load(data, yaml.Loader)
     else:
-        result = ''
+        result = {}
     return result
