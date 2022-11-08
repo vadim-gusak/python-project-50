@@ -11,3 +11,7 @@ def get_type(item):
 
 def get_name(item):
     return item.get('name')
+
+
+def get_value(item):
+    return item.get('value')
