@@ -2,7 +2,8 @@ def create_diff(data_1, data_2):
     names_1, names_2 = set(data_1) - set(data_2), set(data_2) - set(data_1)
     common_names = set(data_1) & set(data_2)
     result = list()
-    for name in names_1 | names_2 | common_names:
+    names = list(names_1 | names_2 | common_names)
+    for name in sorted(names):
         new_item = {'name': name}
         if name in names_1:
             new_item['value'] = data_1[name]
