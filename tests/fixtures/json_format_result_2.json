@@ -1,14 +1,20 @@
 [
   {
-    "dir_removed": {
+    "name": "dir",
+    "type": "removed",
+    "value": {
       "name": "long"
     }
   },
   {
-    "item_old": 0,
-    "item_updated": {
-      "index": 55,
-      "log": 12
-    }
+    "name": "item",
+    "type": "changed",
+    "value": [
+      0,
+      {
+        "index": 55,
+        "log": 12
+      }
+    ]
   }
 ]

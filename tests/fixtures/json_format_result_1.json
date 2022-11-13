@@ -1,66 +1,108 @@
 [
   {
-    "common": [
+    "name": "common",
+    "type": "nested",
+    "value": [
       {
-        "follow_added": false
+        "name": "follow",
+        "type": "added",
+        "value": false
       },
       {
-        "setting1": "Value 1"
+        "name": "setting1",
+        "type": "unchanged",
+        "value": "Value 1"
       },
       {
-        "setting2_removed": 200
+        "name": "setting2",
+        "type": "removed",
+        "value": 200
       },
       {
-        "setting3_old": true,
-        "setting3_updated": null
+        "name": "setting3",
+        "type": "changed",
+        "value": [
+          true,
+          null
+        ]
       },
       {
-        "setting4_added": "blah blah"
+        "name": "setting4",
+        "type": "added",
+        "value": "blah blah"
       },
       {
-        "setting5_added": {
+        "name": "setting5",
+        "type": "added",
+        "value": {
           "key5": "value5"
         }
       },
       {
-        "setting6": [
+        "name": "setting6",
+        "type": "nested",
+        "value": [
           {
-            "doge": [
+            "name": "doge",
+            "type": "nested",
+            "value": [
               {
-                "wow_old": "     ",
-                "wow_updated": "so much"
+                "name": "wow",
+                "type": "changed",
+                "value": [
+                  "     ",
+                  "so much"
+                ]
               }
             ]
           },
           {
-            "key": "value"
+            "name": "key",
+            "type": "unchanged",
+            "value": "value"
           },
           {
-            "ops_added": "vops"
+            "name": "ops",
+            "type": "added",
+            "value": "vops"
           }
         ]
       }
     ]
   },
   {
-    "group1": [
+    "name": "group1",
+    "type": "nested",
+    "value": [
       {
-        "baz_old": "bas",
-        "baz_updated": "bars"
+        "name": "baz",
+        "type": "changed",
+        "value": [
+          "bas",
+          "bars"
+        ]
       },
       {
-        "foo": "bar"
+        "name": "foo",
+        "type": "unchanged",
+        "value": "bar"
       },
       {
-        "nest_old": {
-          "key": "value"
-        },
-        "nest_updated": "str"
+        "name": "nest",
+        "type": "changed",
+        "value": [
+          {
+            "key": "value"
+          },
+          "str"
+        ]
       }
     ]
   },
   {
-    "group2_removed": {
+    "name": "group2",
+    "type": "removed",
+    "value": {
       "abc": 12345,
       "deep": {
         "id": 45
@@ -68,7 +110,9 @@
     }
   },
   {
-    "group3_added": {
+    "name": "group3",
+    "type": "added",
+    "value": {
       "deep": {
         "id": {
           "number": 45
