@@ -11,7 +11,7 @@ def open_(path):
     elif path.endswith('.yml') or path.endswith('.yaml'):
         data_format = 'yml'
     else:
-        data_format = ''
+        raise FileNotFoundError('Wrong file format!')
     return text, data_format
 
 
