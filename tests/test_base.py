@@ -32,23 +32,23 @@ WRONG_FILE_FORMAT_2 = 'Wrong second file format!'
 
 
 @pytest.mark.parametrize('file_path_1, file_path_2, path_to_result',
-                  [(PATH_JSON_FLAT_1, PATH_JSON_FLAT_2, PATH_JSON_FLAT_RESULT),
-                   (PATH_YML_FLAT_1, PATH_YML_FLAT_2, PATH_YML_FLAT_RESULT),
-                   (PATH_JSON_1_1, PATH_JSON_1_2, PATH_JSON_1_RESULT),
-                   (PATH_JSON_2_1, PATH_JSON_2_2, PATH_JSON_2_RESULT)])
+                         [(PATH_JSON_FLAT_1, PATH_JSON_FLAT_2, PATH_JSON_FLAT_RESULT),
+                          (PATH_YML_FLAT_1, PATH_YML_FLAT_2, PATH_YML_FLAT_RESULT),
+                          (PATH_JSON_1_1, PATH_JSON_1_2, PATH_JSON_1_RESULT),
+                          (PATH_JSON_2_1, PATH_JSON_2_2, PATH_JSON_2_RESULT)])
 def test_generate_diff(file_path_1, file_path_2, path_to_result):
     with open(path_to_result) as result_file:
         assert generate_diff(file_path_1, file_path_2) == result_file.read()
 
 
 @pytest.mark.parametrize('file_path_1, file_path_2, print_format, path_to_result',
-                  [(PATH_YML_1, PATH_YML_2, 'stylish', PATH_YAML_RESULT),
-                   (PATH_YML_1, PATH_YML_2, 'plain', PLAIN_1_RESULT),
-                   (PATH_YML_1, PATH_YML_2, 'json', JSON_FORMAT_RESULT_1),
-                   (PATH_JSON_1_1, PATH_JSON_1_2, 'plain', PLAIN_1_RESULT),
-                   (PATH_JSON_2_1, PATH_JSON_2_2, 'plain', PLAIN_2_RESULT),
-                   (PATH_JSON_1_1, PATH_JSON_1_2, 'json', JSON_FORMAT_RESULT_1),
-                   (PATH_JSON_2_1, PATH_JSON_2_2, 'json', JSON_FORMAT_RESULT_2)])
+                         [(PATH_YML_1, PATH_YML_2, 'stylish', PATH_YAML_RESULT),
+                          (PATH_YML_1, PATH_YML_2, 'plain', PLAIN_1_RESULT),
+                          (PATH_YML_1, PATH_YML_2, 'json', JSON_FORMAT_RESULT_1),
+                          (PATH_JSON_1_1, PATH_JSON_1_2, 'plain', PLAIN_1_RESULT),
+                          (PATH_JSON_2_1, PATH_JSON_2_2, 'plain', PLAIN_2_RESULT),
+                          (PATH_JSON_1_1, PATH_JSON_1_2, 'json', JSON_FORMAT_RESULT_1),
+                          (PATH_JSON_2_1, PATH_JSON_2_2, 'json', JSON_FORMAT_RESULT_2)])
 def test_generate_diff_format(file_path_1, file_path_2, print_format, path_to_result):
     with open(path_to_result) as result_file:
         assert generate_diff(file_path_1,
@@ -61,7 +61,7 @@ def test_open_raises_exception():
         open_(PATH_JSON_FLAT_RESULT)
 
 
-def test_create_diff_clear():
+def test_create_diff_is_clear():
     data_1 = parse(*open_(PATH_JSON_1_1))
     data_1_copy = copy.deepcopy(data_1)
     data_2 = parse(*open_(PATH_JSON_1_2))
@@ -71,7 +71,7 @@ def test_create_diff_clear():
     assert data_2 == data_2_copy
 
 
-def test_prepare_to_print_clear():
+def test_prepare_to_print_is_clear():
     data_1 = parse(*open_(PATH_JSON_1_1))
     data_2 = parse(*open_(PATH_JSON_1_2))
     diff = create_diff(data_1, data_2)
