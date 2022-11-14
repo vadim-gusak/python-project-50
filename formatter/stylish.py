@@ -56,9 +56,9 @@ def make_string_from_node(name, value, step, type_='unchanged'):
 
 def normalize_value(value):
     if isinstance(value, bool):
-        return 'true' if value else 'false'
+        value = 'true' if value else 'false'
     elif value is None:
-        return 'null'
+        value = 'null'
     elif isinstance(value, str):
-        return value.strip()
+        value = value.strip()
     return str(value)
