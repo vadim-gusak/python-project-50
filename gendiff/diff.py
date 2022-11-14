@@ -5,14 +5,10 @@ def create_diff(data_1, data_2):
     names = list(names_1 | names_2 | common_names)
     for name in sorted(names):
         new_item = {'name': name}
-        if name in names_1:
-            new_item['value'] = data_1[name]
-            new_item['type'] = 'removed'
-            result.append(new_item)
-            continue
-        elif name in names_2:
-            new_item['value'] = data_2[name]
-            new_item['type'] = 'added'
+        if name in names_1 or name in names_2:
+            new_item['value'] = \
+                data_1[name] if name in names_1 else data_2[name]
+            new_item['type'] = 'removed' if name in names_1 else 'added'
             result.append(new_item)
             continue
         value_1 = data_1[name]
