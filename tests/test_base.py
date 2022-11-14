@@ -4,7 +4,7 @@ from gendiff.diff import create_diff
 from formatter.stylish import prepare_to_print_stylish
 from formatter.plain import prepare_to_print_plaint
 from formatter.json import prepare_to_print_json_format
-from pytest import mark
+import pytest
 import copy
 
 
@@ -31,7 +31,7 @@ WRONG_FILE_FORMAT_1 = 'Wrong first file format!'
 WRONG_FILE_FORMAT_2 = 'Wrong second file format!'
 
 
-@mark.parametrize('file_path_1, file_path_2, path_to_result',
+@pytest.mark.parametrize('file_path_1, file_path_2, path_to_result',
                   [(PATH_JSON_FLAT_1, PATH_JSON_FLAT_2, PATH_JSON_FLAT_RESULT),
                    (PATH_YML_FLAT_1, PATH_YML_FLAT_2, PATH_YML_FLAT_RESULT),
                    (PATH_JSON_1_1, PATH_JSON_1_2, PATH_JSON_1_RESULT),
@@ -41,7 +41,7 @@ def test_generate_diff(file_path_1, file_path_2, path_to_result):
         assert generate_diff(file_path_1, file_path_2) == result_file.read()
 
 
-@mark.parametrize('file_path_1, file_path_2, print_format, path_to_result',
+@pytest.mark.parametrize('file_path_1, file_path_2, print_format, path_to_result',
                   [(PATH_YML_1, PATH_YML_2, 'stylish', PATH_YAML_RESULT),
                    (PATH_YML_1, PATH_YML_2, 'plain', PLAIN_1_RESULT),
                    (PATH_YML_1, PATH_YML_2, 'json', JSON_FORMAT_RESULT_1),
@@ -56,8 +56,9 @@ def test_generate_diff_format(file_path_1, file_path_2, print_format, path_to_re
                              print_format) == result_file.read()
 
 
-def test_parse():
-    assert parse(*open_(PATH_JSON_1_RESULT)) == dict()
+def test_open_raises_exception():
+    with pytest.raises(FileNotFoundError):
+        open_(PATH_JSON_FLAT_RESULT)
 
 
 def test_create_diff_clear():
