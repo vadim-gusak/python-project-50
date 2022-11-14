@@ -34,11 +34,11 @@ def walk(items, path):
 
 def update_value(value):
     if isinstance(value, dict):
-        return '[complex value]'
+        value = '[complex value]'
     elif isinstance(value, bool):
-        return 'true' if value else 'false'
+        value = 'true' if value else 'false'
     elif value is None:
-        return 'null'
+        value = 'null'
     elif isinstance(value, str):
-        return f"'{value.strip()}'"
+        value = f"'{value.strip()}'"
     return str(value)
