@@ -7,3 +7,5 @@ def parse(data, data_format):
         return json.loads(data)
     elif data and data_format == 'yml':
         return yaml.load(data, yaml.Loader)
+    else:
+        raise FileNotFoundError(f"Wrong data_format: {data_format}")

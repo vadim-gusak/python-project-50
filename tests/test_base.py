@@ -61,6 +61,11 @@ def test_open_raises_exception():
         open_(PATH_JSON_FLAT_RESULT)
 
 
+def test_parse_raises_exception():
+    with pytest.raises(FileNotFoundError):
+        parse('something', 'wrong format')
+
+
 def test_create_diff_is_clear():
     data_1 = parse(*open_(PATH_JSON_1_1))
     data_1_copy = copy.deepcopy(data_1)
