@@ -1,4 +1,4 @@
-import json
+from json import dumps
 from gendiff.data import get_name_type_value, get_name
 
 
@@ -38,7 +38,7 @@ def make_str_from_value(value):
     if isinstance(value, dict):
         value = '[complex value]'
     elif isinstance(value, bool) or value is None:
-        value = json.dumps(value)
+        value = dumps(value)
     elif isinstance(value, str):
         value = f"'{value.strip()}'"
     return str(value)
