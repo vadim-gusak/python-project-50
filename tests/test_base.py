@@ -4,6 +4,7 @@ from gendiff.diff import create_diff
 from formatter.stylish import prepare_to_print_stylish
 from formatter.plain import prepare_to_print_plaint
 from formatter.json import prepare_to_print_json_format
+from formatter.base import stringify_diff
 import pytest
 import copy
 
@@ -64,6 +65,12 @@ def test_open_raises_exception():
 def test_parse_raises_exception():
     with pytest.raises(FileNotFoundError):
         parse('something', 'wrong format')
+
+
+def test_stringify_diff_raises_exception():
+    with pytest.raises(FileNotFoundError):
+        stringify_diff('diff data', 'wrong format')
+
 
 
 def test_create_diff_is_clear():
