@@ -78,14 +78,37 @@ Property 'verbose' was added with value: true
 gendiff -f json file1.json file2.json
 ```
 ```
-{
-  "follow_removed": false,
-  "host": "hexlet.io",
-  "proxy_removed": "123.234.53.22",
-  "timeout": 50,
-  "timeout_updated": 20,
-  "verbose_added": true
-}
+[
+  {
+    "name": "follow",
+    "type": "removed",
+    "value": false
+  },
+  {
+    "name": "host",
+    "type": "unchanged",
+    "value": "hexlet.io"
+  },
+  {
+    "name": "proxy",
+    "type": "removed",
+    "value": "123.234.53.22"
+  },
+  {
+    "name": "timeout",
+    "type": "changed",
+    "value": [
+      50,
+      20
+    ]
+  },
+  {
+    "name": "verbose",
+    "type": "added",
+    "value": true
+  }
+]
+
 ```
 Пример в виде аскинемы:
 

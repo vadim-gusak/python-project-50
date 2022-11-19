@@ -72,7 +72,6 @@ def test_stringify_diff_raises_exception():
         stringify_diff('diff data', 'wrong format')
 
 
-
 def test_create_diff_is_clear():
     data_1 = parse(*open_(PATH_JSON_1_1))
     data_1_copy = copy.deepcopy(data_1)
