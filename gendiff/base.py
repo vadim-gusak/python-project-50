@@ -1,6 +1,6 @@
 from gendiff.diff import create_diff
 from gendiff.parser import parse
-from formatter.base import prepare_to_print
+from formatter.base import stringify_diff
 
 
 def open_(path):
@@ -19,5 +19,5 @@ def generate_diff(path_1, path_2, print_format='stylish'):
     data_1 = parse(*open_(path_1))
     data_2 = parse(*open_(path_2))
     diff = create_diff(data_1, data_2)
-    result = prepare_to_print(diff, print_format)
+    result = stringify_diff(diff, print_format)
     return result

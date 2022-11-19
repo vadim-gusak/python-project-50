@@ -1,3 +1,4 @@
+import json
 from gendiff.data import get_name_type_value, get_name
 
 
@@ -14,8 +15,8 @@ def walk(items, path):
         name, type_, value = get_name_type_value(item)
         new_path = f'{path}{name}'
         if type_ == 'added':
-            value = update_value(value)
-            line = f"Property '{new_path}' was added with value: {value}"
+            value_str = make_str_from_value(value)
+            line = f"Property '{new_path}' was added with value: {value_str}"
             result.append(line)
         elif type_ == 'removed':
             line = f"Property '{new_path}' was removed"
@@ -25,20 +26,19 @@ def walk(items, path):
             result.append(line)
         elif type_ == 'changed':
             value_1, value_2 = value
-            value_1, value_2 = update_value(value_1), update_value(value_2)
+            value_1_str = make_str_from_value(value_1)
+            value_2_str = make_str_from_value(value_2)
             line = f"Property '{new_path}' was updated." \
-                   f" From {value_1} to {value_2}"
+                   f" From {value_1_str} to {value_2_str}"
             result.append(line)
     return result
 
 
-def update_value(value):
+def make_str_from_value(value):
     if isinstance(value, dict):
         value = '[complex value]'
-    elif isinstance(value, bool):
-        value = 'true' if value else 'false'
-    elif value is None:
-        value = 'null'
+    elif isinstance(value, bool) or value is None:
+        value = json.dumps(value)
     elif isinstance(value, str):
         value = f"'{value.strip()}'"
     return str(value)
