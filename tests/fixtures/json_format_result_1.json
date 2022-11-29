@@ -1,8 +1,6 @@
 [
   {
-    "name": "common",
-    "type": "nested",
-    "value": [
+    "children": [
       {
         "name": "follow",
         "type": "added",
@@ -39,13 +37,9 @@
         }
       },
       {
-        "name": "setting6",
-        "type": "nested",
-        "value": [
+        "children": [
           {
-            "name": "doge",
-            "type": "nested",
-            "value": [
+            "children": [
               {
                 "name": "wow",
                 "type": "changed",
@@ -54,7 +48,10 @@
                   "so much"
                 ]
               }
-            ]
+            ],
+            "name": "doge",
+            "type": "nested",
+            "value": null
           },
           {
             "name": "key",
@@ -66,14 +63,18 @@
             "type": "added",
             "value": "vops"
           }
-        ]
+        ],
+        "name": "setting6",
+        "type": "nested",
+        "value": null
       }
-    ]
+    ],
+    "name": "common",
+    "type": "nested",
+    "value": null
   },
   {
-    "name": "group1",
-    "type": "nested",
-    "value": [
+    "children": [
       {
         "name": "baz",
         "type": "changed",
@@ -97,7 +98,10 @@
           "str"
         ]
       }
-    ]
+    ],
+    "name": "group1",
+    "type": "nested",
+    "value": null
   },
   {
     "name": "group2",

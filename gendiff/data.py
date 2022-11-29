@@ -5,5 +5,5 @@ def get_name_type_value(item):
     return name, type_, value
 
 
-def get_name(item):
-    return item.get('name')
+def get_children(item):
+    return item.get('children')

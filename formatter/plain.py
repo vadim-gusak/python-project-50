@@ -1,5 +1,5 @@
 from json import dumps
-from gendiff.data import get_name_type_value, get_name
+from gendiff.data import get_name_type_value, get_children
 
 
 def prepare_to_print_plaint(diff):
@@ -10,8 +10,7 @@ def prepare_to_print_plaint(diff):
 
 def walk(items, path):
     result = []
-    items_sorted = sorted(items, key=get_name)
-    for item in items_sorted:
+    for item in items:
         name, type_, value = get_name_type_value(item)
         new_path = f'{path}{name}'
         if type_ == 'added':
@@ -22,7 +21,8 @@ def walk(items, path):
             line = f"Property '{new_path}' was removed"
             result.append(line)
         elif type_ == 'nested':
-            line = '\n'.join(walk(value, f'{new_path}.'))
+            children = get_children(item)
+            line = '\n'.join(walk(children, f'{new_path}.'))
             result.append(line)
         elif type_ == 'changed':
             value_1, value_2 = value
