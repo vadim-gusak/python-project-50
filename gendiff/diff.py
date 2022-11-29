@@ -1,4 +1,4 @@
-def create_diff(data_1, data_2):
+def create_diff(data_1: dict, data_2: dict) -> list:
     names_1, names_2 = set(data_1) - set(data_2), set(data_2) - set(data_1)
     common_names = set(data_1) & set(data_2)
     result = list()

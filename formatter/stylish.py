@@ -2,11 +2,11 @@ from json import dumps
 from gendiff.data import get_name_type_value, get_children
 
 
-def prepare_to_print_stylish(diff: list):
+def prepare_to_print_stylish(diff: list) -> str:
     return '{\n' + walk(diff, 0) + '\n}'
 
 
-def walk(items, depth):
+def walk(items: list, depth: int) -> str:
     result = []
     for item in items:
         name, type_, value = get_name_type_value(item)
@@ -27,7 +27,7 @@ def walk(items, depth):
     return '\n'.join(result)
 
 
-def make_str_from_value(depth, sign, name, value):
+def make_str_from_value(depth: int, sign: str, name: str, value) -> str:
     begin = f'{depth * "    "}  {sign} {name}: '
     if isinstance(value, dict):
         middle = make_str_from_dict(value, depth)
@@ -40,7 +40,7 @@ def make_str_from_value(depth, sign, name, value):
     return result
 
 
-def make_str_from_dict(dict_, depth):
+def make_str_from_dict(dict_: dict, depth: int) -> str:
     result = []
     dict_sorted = dict(sorted(dict_.items()))
     for name, value in dict_sorted.items():
@@ -48,7 +48,7 @@ def make_str_from_dict(dict_, depth):
     return '\n'.join(result)
 
 
-def make_str_from_children(name, children, depth):
+def make_str_from_children(name: str, children: list, depth: int) -> str:
     begin = f'{depth * "    "}    {name}: ' + '{\n'
     walk_result = walk(children, depth + 1)
     end = f"\n{depth * '    '}    " + '}'

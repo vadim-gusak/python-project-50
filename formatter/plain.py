@@ -2,13 +2,13 @@ from json import dumps
 from gendiff.data import get_name_type_value, get_children
 
 
-def prepare_to_print_plaint(diff):
+def prepare_to_print_plaint(diff: list) -> str:
     result = walk(diff, '')
     result = [item.strip() for item in result if item]
     return '\n'.join(result)
 
 
-def walk(items, path):
+def walk(items: list, path: str) -> list:
     result = []
     for item in items:
         name, type_, value = get_name_type_value(item)
@@ -34,7 +34,7 @@ def walk(items, path):
     return result
 
 
-def make_str_from_value(value):
+def make_str_from_value(value) -> str:
     if isinstance(value, dict):
         value = '[complex value]'
     elif isinstance(value, bool) or value is None:
