@@ -1,4 +1,4 @@
-def get_name_type_value(item: dict) -> tuple:
+def get_name_type_value(item: dict) -> tuple[str, str, str]:
     name = item.get('name')
     type_ = item.get('type')
     value = item.get('value')
