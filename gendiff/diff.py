@@ -14,7 +14,6 @@ def create_diff(data_1: dict, data_2: dict) -> list:
         value_1, value_2 = data_1[name], data_2[name]
         if isinstance(value_1, dict) and isinstance(value_2, dict):
             new_item['type'] = 'nested'
-            new_item['value'] = None
             new_item['children'] = create_diff(value_1, value_2)
         elif value_1 == value_2:
             new_item['type'] = 'unchanged'

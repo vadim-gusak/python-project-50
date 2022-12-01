@@ -50,8 +50,7 @@
               }
             ],
             "name": "doge",
-            "type": "nested",
-            "value": null
+            "type": "nested"
           },
           {
             "name": "key",
@@ -65,13 +64,11 @@
           }
         ],
         "name": "setting6",
-        "type": "nested",
-        "value": null
+        "type": "nested"
       }
     ],
     "name": "common",
-    "type": "nested",
-    "value": null
+    "type": "nested"
   },
   {
     "children": [
@@ -100,8 +97,7 @@
       }
     ],
     "name": "group1",
-    "type": "nested",
-    "value": null
+    "type": "nested"
   },
   {
     "name": "group2",
